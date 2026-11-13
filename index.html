@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FootballAI 足球实时赔率 API JavaScript 示例：多公司让球与大小球对比、香港盘、马来盘及 WebSocket 实时更新。">
+  <title>Football Odds API · 足球实时赔率</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">F</span><div><strong>Football Odds API</strong><span class="brand-caption">实时足球赔率 · JavaScript 接入示例</span></div></div>
+    <nav aria-label="相关链接">
+      <a href="https://www.footballai.shop/public/keys/api" target="_blank" rel="noopener noreferrer">接口文档 ↗</a>
+      <a class="apply-link" href="https://www.footballai.shop/" target="_blank" rel="noopener noreferrer">申请 API Key ↗</a>
+    </nav>
+  </header>
+  <main>
+    <section class="connection-panel" aria-labelledby="connection-heading">
+      <div class="panel-intro"><h1 id="connection-heading">足球实时行情</h1><p>输入你自己的 API Key，连接后即可对照各家公司报价。</p></div>
+      <form id="connection-form" autocomplete="off">
+        <label for="api-key">API Key</label>
+        <input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="每次使用时输入，不保存" required>
+        <button type="submit" class="primary-button">连接行情</button>
+        <button id="disconnect" type="button">断开</button>
+      </form>
+      <div class="connection-meta">
+        <span id="connection-state" class="status" data-state="disconnected" role="status" aria-live="polite">未连接</span>
+        <span>最近收包：<time id="last-message">—</time></span>
+        <span>异常消息：<span id="invalid-count">0</span></span>
+      </div>
+      <p id="connection-note" class="connection-note">Key 只用于当前页面连接，刷新后需重新输入。</p>
+    </section>
+    <section class="market-panel" aria-label="赔率对照表">
+      <div class="toolbar">
+        <div class="filters">
+          <label for="market">市场<select id="market"><option value="handicap">让球</option><option value="totals">大小球</option></select></label>
+          <label for="period">阶段<select id="period"><option value="full_time">全场</option><option value="first_half">上半场</option></select></label>
+          <label for="game-type">比赛<select id="game-type"><option value="all">全部</option><option value="early">早盘</option><option value="running">滚球</option><option value="today">赛前（今日）</option></select></label>
+          <label for="odds-format">赔率制式<select id="odds-format"><option value="hk_odds">香港盘</option><option value="ml_odds">马来盘</option></select></label>
+        </div>
+        <div class="legend"><span class="legend-up">↑ 上涨</span><span class="legend-down">↓ 下跌</span><span>高亮 3 秒</span></div>
+      </div>
+      <div class="table-summary"><span id="row-count">0 条盘口</span><span id="side-hint">赔率上方：主队 · 下方：客队</span></div>
+      <div class="pagination" aria-label="盘口分页">
+        <span>每页最多 200 条</span>
+        <div><button id="previous-page" type="button" disabled>上一页</button><span id="page-number">第 1 / 1 页</span><button id="next-page" type="button" disabled>下一页</button></div>
+      </div>
+      <p id="capacity-note" class="capacity-note" role="status" hidden></p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="足球赔率，可横向滚动">
+        <table>
+          <caption class="sr-only">同一比赛、类型、阶段、市场和盘口线的公司报价横向对齐</caption>
+          <thead id="odds-head"></thead>
+          <tbody id="odds-body"></tbody>
+        </table>
+      </div>
+      <div id="empty-state" class="empty-state"><strong>等待连接行情</strong><p>在上方输入 API Key，点击“连接行情”。</p></div>
+      <div class="table-footnote">仅接收连接后的事件，不提供历史快照或断线补发。旧报价保留，悬停查看更新时间；暂无报价显示“—”。</div>
+    </section>
+    <footer>由 <a href="https://www.footballai.shop/" target="_blank" rel="noopener noreferrer">FootballAI</a> 提供数据接口 · 首版支持足球让球与大小球 · 示例代码开放使用，API 访问需要有效 Key。</footer>
+  </main>
+</body>
+</html>

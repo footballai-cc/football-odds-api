@@ -15,7 +15,7 @@
 
 无需安装依赖，无需构建，无需自建后端。下载代码，打开页面，输入你自己的有效 API Key 即可连接。
 
-> English: A vanilla JavaScript example for the FootballAI football odds API. Compare live bookmaker odds through WebSocket, with Asian handicap, over/under, Hong Kong odds and Malay odds. Download the repository, open index.html, enter your own API key and connect.
+> A vanilla JavaScript example for the FootballAI football odds API. Compare live bookmaker odds through WebSocket, with Asian handicap, over/under, Hong Kong odds and Malay odds. Download the repository, open index.html, enter your own API key and connect.
 
 ![足球实时赔率页面，使用虚构比赛和模拟报价](docs/images/football-odds-demo.png)
 
